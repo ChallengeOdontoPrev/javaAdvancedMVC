@@ -14,6 +14,11 @@ public class HomeController {
         return new ModelAndView("home");
     }
 
+    @GetMapping("/success")
+    public ModelAndView success(Model model) {
+        return new ModelAndView("success");
+    }
+
     @PostMapping("/home")
     public ModelAndView home(Model model) {
         return new ModelAndView("home");
