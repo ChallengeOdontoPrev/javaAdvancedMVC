@@ -30,8 +30,6 @@
             <label for="clinicId">Unidade:</label>
             <select id="clinicId" name="clinicId" required>
                 <option value="" disabled selected>Escolha sua Unidade</option>
-                <option value="1">Unidade 1</option>
-                <option value="2">Unidade 2</option>
             </select>
 
             <label for="password">Senha:</label>
@@ -49,5 +47,23 @@
         </form>
     </div>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Faz a requisição ao endpoint /clinics
+            fetch('/clinics')
+                .then(response => response.json()) // Converte a resposta para JSON
+                .then(data => {
+                    const select = document.getElementById('clinicId'); // Seleciona o <select>
+                    data.forEach(clinic => {
+                        // Cria uma nova <option> para cada unidade
+                        const option = document.createElement('option');
+                        option.value = clinic.id; // Valor da opção (ID da unidade)
+                        option.textContent = clinic.name; // Texto exibido (nome da unidade)
+                        select.appendChild(option); // Adiciona a opção ao <select>
+                    });
+                })
+                .catch(error => console.error('Erro ao carregar unidades:', error));
+        });
+    </script>
 </body>
 </html>
