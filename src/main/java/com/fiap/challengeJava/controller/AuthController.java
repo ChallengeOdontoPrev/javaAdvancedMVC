@@ -30,8 +30,10 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDTO> login(@Valid @RequestBody LoginRequestDTO data) {
-        return ResponseEntity.ok(this.authService.login(data));
+    public ModelAndView login(@Valid @ModelAttribute LoginRequestDTO data, Model model) {
+        this.authService.login(data);
+        model.addAttribute("message", "Login realizado com sucesso.");
+        return new ModelAndView("success");
     }
 
     @PostMapping("/signup")
