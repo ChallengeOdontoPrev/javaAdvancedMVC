@@ -28,7 +28,7 @@ public class Address {
     public Address(AddressDTO addressDTO) {
         this.id = addressDTO.getId();
         this.street = addressDTO.getStreet();
-        this.num = addressDTO.getNumber();
+        this.num = addressDTO.getNum();
         this.city = addressDTO.getCity();
         this.state = addressDTO.getState();
         this.zipCode = addressDTO.getZipCode();

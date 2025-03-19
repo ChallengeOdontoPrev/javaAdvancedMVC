@@ -16,7 +16,7 @@ public class AddressDTO {
     @NotBlank(message = "Rua é obrigatória")
     private String street;
     @NotBlank(message = "Número é obrigatório")
-    private String number;
+    private String num;
     @NotBlank(message = "Cidade é obrigatória")
     private String city;
     @NotBlank(message = "Estado é obrigatório")
@@ -27,7 +27,7 @@ public class AddressDTO {
     public AddressDTO(Address address) {
         this.id = address.getId();
         this.street = address.getStreet();
-        this.number = address.getNum();
+        this.num = address.getNum();
         this.city = address.getCity();
         this.state = address.getState();
         this.zipCode = address.getZipCode();
