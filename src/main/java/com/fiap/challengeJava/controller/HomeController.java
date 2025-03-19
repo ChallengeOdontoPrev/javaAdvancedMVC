@@ -34,6 +34,11 @@ public class HomeController {
         return new ModelAndView("manageAddresses");
     }
 
+    @GetMapping("/cadastro-endereco")
+    public ModelAndView cadastroEndereco(Model model) {
+        return new ModelAndView("cadastro-endereco");
+    }
+
     @PostMapping("/home")
     public ModelAndView home(Model model) {
         return new ModelAndView("home");

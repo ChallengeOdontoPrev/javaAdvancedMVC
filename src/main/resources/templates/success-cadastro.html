@@ -3,22 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Serviços - OdontoPrev</title>
-    <link rel="stylesheet" href="/css/servicos.css">
+    <title>Sucesso - OdontoPrev</title>
+    <link rel="stylesheet" href="/css/success.css">
 </head>
 <body>
-
     <div class="container">
-        <div class="logo">
-            <img src="/images/logo.png" alt="OdontoPrev">
-        </div>
-
-        <h2>Serviços</h2>
-
+        <h2>Sucesso!</h2>
+        <p th:text="${message}">Cadastro realizado com sucesso!</p>
         <form action="#" th:action="@{/manageAddresses}" method="get">
-            <button class="login-button" type="submit">Gerir Endereços</button>
+            <button class="login-button" type="submit">Voltar</button>
         </form>
     </div>
-
 </body>
 </html>

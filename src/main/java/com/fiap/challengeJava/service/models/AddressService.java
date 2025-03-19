@@ -30,11 +30,18 @@ public class AddressService {
     }
 
     public AddressDTO findById(Long id) {
-        return new AddressDTO(addressRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Address não encontrada")));
+        return new AddressDTO(addressRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Endereço não encontrado")));
     }
 
     @Transactional
     public void delete(Long id) {
         addressRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void update(Long id, String newStreet) {
+        Address address = addressRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Endereço não encontrado"));
+        address.setStreet(newStreet);
+        addressRepository.save(address);
     }
 }
