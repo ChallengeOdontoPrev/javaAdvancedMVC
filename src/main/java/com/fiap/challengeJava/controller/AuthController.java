@@ -33,7 +33,7 @@ public class AuthController {
     public ModelAndView login(@Valid @ModelAttribute LoginRequestDTO data, Model model) {
         this.authService.login(data);
         model.addAttribute("message", "Login realizado com sucesso.");
-        return new ModelAndView("success");
+        return new ModelAndView("servicos");
     }
 
     @PostMapping("/signup")

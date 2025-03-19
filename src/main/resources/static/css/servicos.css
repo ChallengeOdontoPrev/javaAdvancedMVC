@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #ffffff;
+}
+
+.container {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+}
+
+.logo img {
+    width: 260px;
+    margin-bottom: 10px;
+}
+
+.logo h1 {
+    color: #007bff;
+    margin: 0;
+}
+
+h2 {
+    font-size: 24px;
+    margin: 20px 0;
+    color: #333;
+}
+
+.service-button {
+    display: inline-block;
+    padding: 15px 30px;
+    border: 2px solid #007bff;
+    color: #007bff;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.service-button:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.login-text {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.login-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #007bff;
+    color: #007bff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background-color: #007bff;
+    color: white;
+}

@@ -24,6 +24,16 @@ public class HomeController {
         return new ModelAndView("error");
     }
 
+    @GetMapping("/servicos")
+    public ModelAndView servicos(Model model) {
+        return new ModelAndView("servicos");
+    }
+
+    @GetMapping("/manageAddresses")
+    public ModelAndView manageAddresses(Model model) {
+        return new ModelAndView("manageAddresses");
+    }
+
     @PostMapping("/home")
     public ModelAndView home(Model model) {
         return new ModelAndView("home");

@@ -32,4 +32,9 @@ public class AddressService {
     public AddressDTO findById(Long id) {
         return new AddressDTO(addressRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Address não encontrada")));
     }
+
+    @Transactional
+    public void delete(Long id) {
+        addressRepository.deleteById(id);
+    }
 }

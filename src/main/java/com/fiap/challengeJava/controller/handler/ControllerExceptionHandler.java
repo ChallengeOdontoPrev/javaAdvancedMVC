@@ -3,6 +3,7 @@ package com.fiap.challengeJava.controller.handler;
 import com.fiap.challengeJava.service.exceptions.InvalidCredentialsException;
 import com.fiap.challengeJava.service.exceptions.UserAlreadyExistsException;
 import jakarta.servlet.http.HttpServletRequest;
+import org.hibernate.TransientObjectException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
