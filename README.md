@@ -2,7 +2,7 @@
 
 Serviço de Validação de Consultas Odontológicas
 
-### Link p/ apresentação da solução: 
+### Link p/ apresentação da solução: https://www.youtube.com/watch?v=U6O9ppiCInM
 
 ## Integrantes do Grupo
 
