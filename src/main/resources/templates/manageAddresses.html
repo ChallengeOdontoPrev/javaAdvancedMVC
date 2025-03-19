@@ -16,7 +16,7 @@
         <h2>Gerir endereços</h2>
 
         <div class="endereco-container">
-            <form action="#" th:action="@{/cadastro-endereco}" method="get" class="add-address-form">
+            <form action="#" th:action="@{/cadastro-endereco}" method="post" class="add-address-form">
                 <button type="submit" class="add-button">
                     <img src="/images/add-icon.png" alt="Adicionar Endereço">
                     <span>Adicionar Endereço</span>
@@ -26,7 +26,7 @@
             <div id="endereco-list"></div>
         </div>
 
-        <form action="#" th:action="@{/servicos}" method="get" class="back-form">
+        <form action="#" th:action="@{/servicos}" method="post" class="back-form">
             <button class="back-button" type="submit">Voltar</button>
         </form>
     </div>
@@ -91,7 +91,7 @@
                                 .then(response => {
                                     if (response.ok) {
                                         alert('Endereço excluído com sucesso!');
-                                        window.location.href = '/manageAddresses'; // Redireciona para /manageAddresses
+                                        window.location.reload(); // Recarrega a página para exibir a lista atualizada
                                     } else {
                                         alert('Erro ao excluir o endereço. Certifique-se de que ele não está associado a nenhuma clinica.');
                                     }

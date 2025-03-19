@@ -2,7 +2,6 @@ package com.fiap.challengeJava.controller;
 
 import com.fiap.challengeJava.dto.UserDTO;
 import com.fiap.challengeJava.dto.auth.LoginRequestDTO;
-import com.fiap.challengeJava.dto.auth.LoginResponseDTO;
 import com.fiap.challengeJava.dto.auth.RegisterRequestDTO;
 import com.fiap.challengeJava.dto.auth.RegisterResponseDTO;
 import com.fiap.challengeJava.enums.UserRole;
@@ -11,13 +10,15 @@ import com.fiap.challengeJava.service.models.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/auth")
@@ -43,9 +44,29 @@ public class AuthController {
         return new ModelAndView("success");
     }
 
-    @GetMapping
+    @GetMapping("/role")
     public ResponseEntity<List<UserDTO>> findByRole(@RequestParam UserRole role) {
         List<UserDTO> users = userService.findByRole(role).stream().map(UserDTO::new).toList();
+        return ResponseEntity.ok(users);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<UserDTO>> findAll() {
+        // Obtém todos os usuários do serviço
+        List<UserDTO> users = userService.findAll();
+
+        // Obtém o e-mail do usuário autenticado no contexto do Spring Security
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
+            String authenticatedUserEmail = ((UserDetails) authentication.getPrincipal()).getUsername(); // E-mail do usuário logado
+
+            // Filtra a lista de usuários para remover o usuário autenticado
+            users = users.stream()
+                    .filter(user -> !user.getEmail().equals(authenticatedUserEmail)) // Compara o e-mail do usuário logado com os e-mails da lista
+                    .collect(Collectors.toList());
+        }
+
+        // Retorna a lista filtrada
         return ResponseEntity.ok(users);
     }
 
@@ -65,4 +86,15 @@ public class AuthController {
         return ResponseEntity.ok("Senha redefinida com sucesso.");
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable Long id) {
+        userService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity update(@PathVariable Long id, @RequestParam String newName) {
+        userService.update(id, newName);
+        return ResponseEntity.ok("Usuário atualizado com sucesso.");
+    }
 }

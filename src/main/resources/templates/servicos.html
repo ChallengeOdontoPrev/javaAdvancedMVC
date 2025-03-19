@@ -15,9 +15,16 @@
 
         <h2>Serviços</h2>
 
-        <form action="#" th:action="@{/manageAddresses}" method="get">
-            <button class="login-button" type="submit">Gerir Endereços</button>
-        </form>
+        <div class="services">
+            <form action="#" th:action="@{/manageAddresses}" method="post">
+                <button class="login-button" type="submit">Gerir Endereços</button>
+            </form>
+
+            <form action="#" th:action="@{/manageUser}" method="post">
+                <button class="login-button" type="submit">Gerir Usuarios</button>
+            </form>
+        </div>
+
     </div>
 
 </body>

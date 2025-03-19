@@ -14,27 +14,32 @@ public class HomeController {
         return new ModelAndView("home");
     }
 
-    @GetMapping("/success")
+    @PostMapping("/success")
     public ModelAndView success(Model model) {
         return new ModelAndView("success");
     }
 
-    @GetMapping("/error")
+    @PostMapping("/error")
     public ModelAndView error(Model model) {
         return new ModelAndView("error");
     }
 
-    @GetMapping("/servicos")
+    @PostMapping("/servicos")
     public ModelAndView servicos(Model model) {
         return new ModelAndView("servicos");
     }
 
-    @GetMapping("/manageAddresses")
+    @PostMapping("/manageAddresses")
     public ModelAndView manageAddresses(Model model) {
         return new ModelAndView("manageAddresses");
     }
 
-    @GetMapping("/cadastro-endereco")
+    @PostMapping("/manageUser")
+    public ModelAndView manageUser(Model model) {
+        return new ModelAndView("manageUser");
+    }
+
+    @PostMapping("/cadastro-endereco")
     public ModelAndView cadastroEndereco(Model model) {
         return new ModelAndView("cadastro-endereco");
     }

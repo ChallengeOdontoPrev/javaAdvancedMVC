@@ -67,5 +67,17 @@ public class UserService {
         return this.userRepository.findByRole(role);
     }
 
+    @Transactional
+    public void delete(Long id) {
+        this.userRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void update(Long id, String newName) {
+        User user = this.userRepository.findById(id)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
+        user.setName(newName);
+        this.userRepository.save(user);
+    }
 
 }
