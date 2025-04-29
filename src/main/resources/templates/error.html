@@ -8,10 +8,11 @@
 </head>
 <body>
     <div class="container">
-        <h2>Erro!</h2>
-        <p th:text="${message}">Erro inesperado!!</p>
+        <div class="logo">
+            <img src="/images/close.png" alt="Erro">
+        </div>
         <form action="#" th:action="@{/home}" method="post">
-            <button class="login-button" type="submit">Tentar novamente</button>
+            <button class="login-button" type="submit">OK</button>
         </form>
     </div>
 </body>

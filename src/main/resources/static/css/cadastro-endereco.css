@@ -96,3 +96,11 @@ label {
 .address-back-form {
     width: 100%;
 }
+
+select {
+    width: 30%;
+    padding: 10px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}

@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerir Endereços - OdontoPrev</title>
+    <title th:text="#{gerir-enderecos.title}">Gerir Endereços - OdontoPrev</title>
     <link rel="stylesheet" href="/css/manageAddresses.css">
+    <script src="/js/scripts.js"></script>
 </head>
 <body>
 
@@ -13,13 +14,15 @@
             <img src="/images/logo.png" alt="OdontoPrev">
         </div>
 
-        <h2>Gerir endereços</h2>
+        <h2 th:text="#{gerir-enderecos.header}">Gerir endereços</h2>
+
+        <div th:replace="~{fragments :: langSelector}"></div>
 
         <div class="endereco-container">
             <form action="#" th:action="@{/cadastro-endereco}" method="post" class="add-address-form">
                 <button type="submit" class="add-button">
                     <img src="/images/add-icon.png" alt="Adicionar Endereço">
-                    <span>Adicionar Endereço</span>
+                    <span th:text="#{gerir-enderecos.button.add}">Adicionar Endereço</span>
                 </button>
             </form>
 
@@ -27,33 +30,26 @@
         </div>
 
         <form action="#" th:action="@{/servicos}" method="post" class="back-form">
-            <button class="back-button" type="submit">Voltar</button>
+            <button class="back-button" type="submit" th:text="#{gerir-enderecos.button.back}">Voltar</button>
         </form>
     </div>
 
    <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Faz a requisição ao endpoint /address para carregar os endereços
             fetch('/address')
-                .then(response => response.json()) // Converte a resposta para JSON
+                .then(response => response.json())
                 .then(data => {
-                    const enderecoList = document.getElementById('endereco-list'); // Seleciona o container
+                    const enderecoList = document.getElementById('endereco-list');
 
-                    // Itera sobre os endereços retornados pelo backend
                     data.forEach(address => {
-                        // Cria uma nova div para cada endereço
                         const enderecoItem = document.createElement('div');
                         enderecoItem.className = 'endereco-item';
 
-                        // Cria a div de informações do endereço
                         const enderecoInfo = document.createElement('div');
                         enderecoInfo.className = 'endereco-info';
-                        enderecoInfo.innerHTML = `<span>${address.street}</span>`; // Exibe apenas o nome da rua
-
-                        // Armazena o ID do endereço no dataset do elemento
+                        enderecoInfo.innerHTML = `<span>${address.street}</span>`;
                         enderecoInfo.dataset.id = address.id;
 
-                        // Cria a div de ações (editar/excluir)
                         const enderecoActions = document.createElement('div');
                         enderecoActions.className = 'endereco-actions';
 
@@ -64,21 +60,17 @@
                         const deleteButton = document.createElement('button');
                         deleteButton.className = 'delete-button';
                         deleteButton.innerHTML = '<img src="/images/delete-icon.png" alt="Excluir">';
-                        deleteButton.dataset.id = address.id; // Armazena o ID do endereço no botão
+                        deleteButton.dataset.id = address.id;
 
-                        // Adiciona os botões à div de ações
                         enderecoActions.appendChild(editButton);
                         enderecoActions.appendChild(deleteButton);
 
-                        // Monta o item completo
                         enderecoItem.appendChild(enderecoInfo);
                         enderecoItem.appendChild(enderecoActions);
 
-                        // Adiciona o item ao container
                         enderecoList.appendChild(enderecoItem);
                     });
 
-                    // Adiciona eventos de clique aos botões de exclusão
                     const deleteButtons = document.querySelectorAll('.delete-button');
                     deleteButtons.forEach(button => {
                         button.addEventListener('click', function () {
@@ -101,7 +93,6 @@
                         });
                     });
 
-                    // Adiciona eventos de clique aos botões de edição
                     const editButtons = document.querySelectorAll('.edit-button');
                     editButtons.forEach(button => {
                         button.addEventListener('click', function () {
@@ -109,7 +100,6 @@
                             const id = enderecoInfo.dataset.id; // Obtém o ID do endereço
                             const currentStreet = enderecoInfo.querySelector('span').textContent; // Valor atual da rua
 
-                            // Substitui o texto por um campo de entrada
                             const input = document.createElement('input');
                             input.type = 'text';
                             input.value = currentStreet;
@@ -118,25 +108,19 @@
                             input.style.border = '1px solid #007bff';
                             input.style.borderRadius = '4px';
 
-                            // Substitui o conteúdo do span pelo campo de entrada
                             enderecoInfo.innerHTML = '';
                             enderecoInfo.appendChild(input);
-
-                            // Move o foco para o campo de entrada
                             input.focus();
 
-                            // Salva as alterações quando o usuário sai do campo
                             input.addEventListener('blur', function () {
                                 const newStreet = input.value.trim(); // Novo valor da rua
 
                                 if (newStreet !== currentStreet) {
-                                    // Faz a requisição PUT para atualizar o endereço
                                     fetch(`/address/${id}?newStreet=${encodeURIComponent(newStreet)}`, {
                                         method: 'PUT'
                                     })
                                     .then(response => {
                                         if (response.ok) {
-                                            // Atualiza o texto exibido
                                             enderecoInfo.innerHTML = `<span>${newStreet}</span>`;
                                         } else {
                                             alert('Erro ao atualizar o endereço.');
@@ -144,12 +128,10 @@
                                     })
                                     .catch(error => console.error('Erro:', error));
                                 } else {
-                                    // Restaura o texto original se não houver alteração
                                     enderecoInfo.innerHTML = `<span>${currentStreet}</span>`;
                                 }
                             });
 
-                            // Salva as alterações quando o usuário pressiona Enter
                             input.addEventListener('keypress', function (event) {
                                 if (event.key === 'Enter') {
                                     input.blur(); // Dispara o evento 'blur' para salvar

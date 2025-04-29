@@ -8,10 +8,11 @@
 </head>
 <body>
     <div class="container">
-        <h2>Sucesso!</h2>
-        <p th:text="${message}">Cadastro realizado com sucesso!</p>
+        <div class="logo">
+            <img src="/images/done.png" alt="Done">
+        </div>
         <form action="#" th:action="@{/login}" method="post">
-            <button class="login-button" type="submit">Ir para login</button>
+            <button class="login-button" type="submit">Login</button>
         </form>
     </div>
 </body>

@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerir Usuários - OdontoPrev</title>
+    <title th:text="#{gerir-usuarios.title}">Gerir Usuários - OdontoPrev</title>
     <link rel="stylesheet" href="/css/manageUser.css">
+    <script src="/js/scripts.js"></script>
 </head>
 <body>
 
     <div class="user-container">
         <div class="user-logo">
-            <img src="/images/logo.png" alt="OdontoPrev">
+            <img src="/images/logo.png" th:alt="#{service.header}" alt="OdontoPrev">
         </div>
 
-        <h2>Gerir Usuários</h2>
+        <h2 th:text="#{gerir-usuarios.header}">Gerir Usuários</h2>
+
+        <div th:replace="~{fragments :: langSelector}"></div>
 
         <div class="user-list-container">
             <!-- Lista de Usuários -->
@@ -21,33 +24,25 @@
         </div>
 
         <form action="#" th:action="@{/servicos}" method="post" class="back-form">
-            <button class="back-button" type="submit">Voltar</button>
+            <button class="back-button" type="submit" th:text="#{gerir-usuarios.button.back}">Voltar</button>
         </form>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Faz a requisição ao endpoint /auth para carregar os usuários
             fetch('/auth')
-                .then(response => response.json()) // Converte a resposta para JSON
+                .then(response => response.json())
                 .then(data => {
-                    const userList = document.getElementById('user-list'); // Seleciona o container
-
-                    // Itera sobre os usuários retornados pelo backend
+                    const userList = document.getElementById('user-list');
                     data.forEach(user => {
-                        // Cria uma nova div para cada usuário
                         const userItem = document.createElement('div');
                         userItem.className = 'user-item';
 
-                        // Cria a div de informações do usuário
                         const userInfo = document.createElement('div');
                         userInfo.className = 'user-info';
-                        userInfo.innerHTML = `<span>${user.name}</span>`; // Exibe apenas o nome do usuário
-
-                        // Armazena o ID do usuário no dataset do elemento
+                        userInfo.innerHTML = `<span>${user.name}</span>`;
                         userInfo.dataset.id = user.id;
 
-                        // Cria a div de ações (editar/excluir)
                         const userActions = document.createElement('div');
                         userActions.className = 'user-actions';
 
@@ -60,18 +55,12 @@
                         deleteButton.innerHTML = '<img src="/images/delete-icon.png" alt="Excluir">';
                         deleteButton.dataset.id = user.id;
 
-
                         userActions.appendChild(editButton);
                         userActions.appendChild(deleteButton);
-
-
                         userItem.appendChild(userInfo);
                         userItem.appendChild(userActions);
-
-
                         userList.appendChild(userItem);
                     });
-
 
                     const deleteButtons = document.querySelectorAll('.delete-user-button');
                     deleteButtons.forEach(button => {
@@ -95,14 +84,12 @@
                         });
                     });
 
-
                     const editButtons = document.querySelectorAll('.edit-user-button');
                     editButtons.forEach(button => {
                         button.addEventListener('click', function () {
                             const userInfo = this.closest('.user-item').querySelector('.user-info');
                             const id = userInfo.dataset.id;
                             const currentName = userInfo.querySelector('span').textContent;
-
 
                             const input = document.createElement('input');
                             input.type = 'text';
@@ -112,25 +99,18 @@
                             input.style.border = '1px solid #007bff';
                             input.style.borderRadius = '4px';
 
-
                             userInfo.innerHTML = '';
                             userInfo.appendChild(input);
-
-
                             input.focus();
-
 
                             input.addEventListener('blur', function () {
                                 const newName = input.value.trim();
-
                                 if (newName !== currentName) {
-
                                     fetch(`/auth/${id}?newName=${encodeURIComponent(newName)}`, {
                                         method: 'PUT'
                                     })
                                     .then(response => {
                                         if (response.ok) {
-
                                             userInfo.innerHTML = `<span>${newName}</span>`;
                                         } else {
                                             alert('Erro ao atualizar o usuário.');
@@ -138,11 +118,9 @@
                                     })
                                     .catch(error => console.error('Erro:', error));
                                 } else {
-
                                     userInfo.innerHTML = `<span>${currentName}</span>`;
                                 }
                             });
-
 
                             input.addEventListener('keypress', function (event) {
                                 if (event.key === 'Enter') {
