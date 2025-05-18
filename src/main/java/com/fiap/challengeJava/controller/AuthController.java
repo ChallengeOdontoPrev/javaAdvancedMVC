@@ -6,6 +6,7 @@ import com.fiap.challengeJava.dto.auth.RegisterRequestDTO;
 import com.fiap.challengeJava.dto.auth.RegisterResponseDTO;
 import com.fiap.challengeJava.enums.UserRole;
 import com.fiap.challengeJava.service.AuthService;
+import com.fiap.challengeJava.service.ChatService;
 import com.fiap.challengeJava.service.models.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +31,14 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
+    @Autowired
+    private ChatService chatService;
+
     @PostMapping("/login")
     public ModelAndView login(@Valid @ModelAttribute LoginRequestDTO data, Model model) {
         this.authService.login(data);
-        model.addAttribute("message", "Login realizado com sucesso.");
+        String mensagemIa = chatService.generate();
+        model.addAttribute("mensagemIa", mensagemIa);
         return new ModelAndView("servicos");
     }
 

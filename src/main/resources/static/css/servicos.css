@@ -89,3 +89,14 @@ select {
     border-radius: 5px;
     margin-bottom: 5px;
 }
+
+.ia-message {
+    background-color: #eef6fc;
+    border-left: 4px solid #0b76d1;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    font-style: italic;
+    color: #333;
+    width: 40%;
+}
