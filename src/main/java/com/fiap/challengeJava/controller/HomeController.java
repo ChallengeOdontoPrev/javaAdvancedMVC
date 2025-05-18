@@ -58,6 +58,16 @@ public class HomeController {
         return new ModelAndView("manageAddresses");
     }
 
+    @PostMapping("/forgotPassword")
+    public ModelAndView forgotPassword(Model model) {
+        return new ModelAndView("forgotPassword");
+    }
+
+    @GetMapping("/forgotPassword")
+    public ModelAndView forgotPasswordRefresh(Model model) {
+        return new ModelAndView("forgotPassword");
+    }
+
     @PostMapping("/manageUser")
     public ModelAndView manageUser(Model model) {
         return new ModelAndView("manageUser");

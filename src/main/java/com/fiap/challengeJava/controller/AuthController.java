@@ -77,18 +77,10 @@ public class AuthController {
 
     // Endpoint para solicitar a redefinição de senha
     @PostMapping("/forgot-password")
-    public ResponseEntity<String> forgotPassword(@RequestParam("email") String email) {
-        authService.forgotPassword(email);
-        return ResponseEntity.ok("E-mail de redefinição de senha enviado.");
-    }
-
-    // Endpoint para redefinir a senha
-    @PostMapping("/reset-password")
-    public ResponseEntity<String> resetPassword(@RequestParam("token") String token,
-                                                @RequestParam("newPassword") String newPassword,
-                                                @RequestParam("confirmNewPassword") String confirmNewPassword) {
-        authService.resetPassword(token, newPassword, confirmNewPassword);
-        return ResponseEntity.ok("Senha redefinida com sucesso.");
+    public ModelAndView forgotPassword(@RequestParam("email") String email, Model model) {
+        authService.publishMessageToForgotPassword(email);
+        model.addAttribute("message", "Enviamos a redefinição de senha para o seu e-mail: " + email);
+        return new ModelAndView("success");
     }
 
     @DeleteMapping("/{id}")

@@ -1,6 +1,7 @@
 package com.fiap.challengeJava.service;
 
 import com.fiap.challengeJava.domain.User;
+import com.fiap.challengeJava.dto.EmailDTO;
 import com.fiap.challengeJava.dto.UserDTO;
 import com.fiap.challengeJava.dto.auth.LoginRequestDTO;
 import com.fiap.challengeJava.dto.auth.LoginResponseDTO;
@@ -30,6 +31,8 @@ public class AuthService implements UserDetailsService {
     private TokenService tokenService;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+    @Autowired
+    private MessageSenderService emailService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -76,41 +79,8 @@ public class AuthService implements UserDetailsService {
         return new RegisterResponseDTO(user.getEmail(), user.getName());
     }
 
-    @Transactional
-    public void forgotPassword(String email) {
+    public void publishMessageToForgotPassword(String email) {
         User user = userService.findByEmail(email);
-
-        // Gera o token JWT específico para redefinição de senha
-        String token = tokenService.generatePasswordResetToken(user);
-
-        // Cria o link de redefinição de senha
-        String resetUrl = "http://localhost:8080/auth/reset-password?token=" + token;
-    }
-
-    @Transactional
-    public void resetPassword(String token, String newPassword, String confirmNewPassword) {
-        // Valida as senhas
-        validatePassword(newPassword, confirmNewPassword);
-
-        // Valida o token e obtém o e-mail
-        String email = tokenService.validatePasswordResetToken(token);
-        if (email == null) {
-            throw new RuntimeException("Token inválido ou expirado.");
-        }
-
-        // Encontra o usuário pelo e-mail
-        UserDTO user = new UserDTO(
-                userService.findByEmail(email)
-        );
-
-        // Atualiza a senha
-        user.setPassword(passwordEncoder.encode(newPassword));
-        userService.updatePassword(user);
-    }
-
-    private void validatePassword(String password, String confirmPassword) {
-        if (!password.equals(confirmPassword)) {
-            throw new InvalidCredentialsException("As senhas não coincidem !!");
-        }
+        emailService.processAndSendMessage(new EmailDTO(user.getEmail()));
     }
 }
