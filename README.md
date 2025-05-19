@@ -15,6 +15,8 @@ Serviço de Validação de Consultas Odontológicas
 
 ## Descrição do Projeto
 
+AVISO: O recurso de IA utiliza o CLI do GCP, logo é necessário ter o GCP instalado e configurado na máquina, com a conta configurada, neste caso somente a minha, e o projeto ativo.
+
 Projeto de validação de consultas odontológicas desenvolvido para a OdontoPrev. O objetivo é combater sinistros e fraudes em atendimentos odontológicos por meio de visão computacional, capturando imagens no início e no fim dos procedimentos. A validação é feita por um aplicativo mobile utilizado exclusivamente pelo dentista responsável, garantindo mais segurança e controle.
 
 A aplicação é composta por uma API em Java Spring Boot, app mobile em Kotlin e modelos de visão computacional integrados via Python e Roboflow. O banco de dados Oracle garante consistência das informações e segurança nas validações. A solução é pensada para se integrar ao fluxo atual de atendimentos, com mínima fricção para os profissionais.
