@@ -2,7 +2,7 @@
 
 Serviço de Validação de Consultas Odontológicas
 
-### Link p/ apresentação da solução: https://www.youtube.com/watch?v=U6O9ppiCInM
+### Link p/ apresentação da solução: https://youtu.be/Zj2Wa2hQ4Y8
 
 ## Integrantes do Grupo
 
@@ -15,8 +15,22 @@ Serviço de Validação de Consultas Odontológicas
 
 ## Descrição do Projeto
 
-Projeto de validação de consultas odontológicas desenvolvido para a OdontoPrev. 
-O objetivo principal deste projeto é combater sinistros e fraudes em consultas e procedimentos odontológicos, utilizando tecnologia de visão computacional no inicio e fim do procedimento, e validação de consultas por meio de um aplicativo mobile.
+Projeto de validação de consultas odontológicas desenvolvido para a OdontoPrev. O objetivo é combater sinistros e fraudes em atendimentos odontológicos por meio de visão computacional, capturando imagens no início e no fim dos procedimentos. A validação é feita por um aplicativo mobile utilizado exclusivamente pelo dentista responsável, garantindo mais segurança e controle.
+
+A aplicação é composta por uma API em Java Spring Boot, app mobile em Kotlin e modelos de visão computacional integrados via Python e Roboflow. O banco de dados Oracle garante consistência das informações e segurança nas validações. A solução é pensada para se integrar ao fluxo atual de atendimentos, com mínima fricção para os profissionais.
+
+### Viabilidade da Solução
+
+- **Tecnológica**: Uso de ferramentas consolidadas e escaláveis como Spring Boot, Kotlin e Oracle.
+- **Operacional**: Processo simples e rápido para os dentistas, com mínima interferência no atendimento.
+- **Econômica**: Redução de custos com auditorias e sinistros, aproveitando tecnologias já disponíveis.
+
+### Pertinência da Solução Entregue
+
+- **Alinhamento com a dor do cliente**: Foco direto na prevenção de fraudes e sinistros.
+- **Ganho em confiabilidade**: Evidências visuais e validação autenticada reforçam a veracidade dos atendimentos.
+- **Aplicabilidade real**: Adaptação prática ao fluxo da rede credenciada, com adoção viável no dia a dia.
+
 
 Obs: Vale ressaltar que o Aplicativo é direcionado aos dentistas e atendentes/recepcionistas.
 
